@@ -1,0 +1,266 @@
+%----------------------------------
+\section{Job Listing}
+\label{sec:Job Listing}
+%----------------------------------
+
+The advertisement analysed in Section~\ref{sec:Data Science Role} is reproduced below as
+retrieved on 14 August 2026 from
+\url{https://au.gradconnection.com/employers/tiktok/jobs/tiktok-machine-learning-engineer-graduate-trust-and-safety-engineering-2027-start-5/}.
+Applications close 30 August 2026.
+
+\begin{figure}[h]
+    \centering
+    \fbox{\includegraphics[width=0.92\linewidth, page=1]{img/job_advertisement.pdf}}
+    \Description{A one-page copy of the TikTok job advertisement for a Machine Learning
+    Engineer Graduate in Trust and Safety Engineering, listing the team introduction,
+    nine responsibilities, four minimum qualifications and two preferred qualifications.}
+    \caption{Job advertisement: TikTok, Machine Learning Engineer Graduate (Trust and
+    Safety Engineering) --- 2027 Start, Sydney NSW.}
+    \label{fig:job advertisement}
+\end{figure}
+
+\clearpage
+
+%----------------------------------
+\section{Development Process}
+\label{sec:Development Process}
+%----------------------------------
+
+This appendix documents how the executive summary was produced, as evidence of process
+rather than of outcome alone.
+
+\subsection{Pipeline}
+
+The analysis is five scripts, run in order, each writing artefacts the next consumes
+(Table~\ref{tab:pipeline}). Every number quoted in Section~\ref{sec:Data Analysis} comes
+from \texttt{results/results.json}, which is regenerated from scratch by
+\texttt{03\_analysis.py}.
+
+\begin{table}[h]
+\centering
+\caption{Analysis pipeline. Total runtime on a consumer laptop was approximately
+25 minutes, dominated by the neural network folds on the larger corpus.}
+\label{tab:pipeline}
+\begin{tabular}{llp{6.2cm}}
+\toprule
+\textbf{Step} & \textbf{Script} & \textbf{Purpose} \\
+\midrule
+1 & \texttt{01\_download\_data.py} & Fetch both corpora from GitHub and Figshare; no
+                                     account required \\
+2 & \texttt{02\_profile\_data.py}  & Record exact row counts, attributes and class balance
+                                     quoted in Section~\ref{sec:Data Set} \\
+3 & \texttt{03\_analysis.py}       & Stratified 5-fold cross validation of both models on
+                                     both corpora, cross-corpus transfer, paired $t$-tests \\
+4 & \texttt{04\_job\_ad\_pdf.py}   & Typeset the retrieved advertisement as
+                                     Figure~\ref{fig:job advertisement} \\
+5 & \texttt{05\_figures.py}        & Render the precision-recall and ROC curves and the
+                                     transfer chart \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Core Modelling Code}
+
+Listing~\ref{lst:models} shows the two estimators and the feature pipeline. The
+vectoriser sits \emph{inside} the pipeline so that
+\texttt{StratifiedKFold} refits it on each training fold; fitting it once over the whole
+corpus would leak test-fold vocabulary and inflate every metric, the pitfall
+\citet{page2024evaluating} raises on slide~35.
+
+\begin{lstlisting}[caption={Feature pipeline and the two estimators
+(\texttt{code/03\_analysis.py}).}, label={lst:models}]
+def make_vectoriser():
+    # Fitted inside every fold, never on the full corpus.
+    return TfidfVectorizer(
+        sublinear_tf=True, min_df=3, max_features=20000,
+        ngram_range=(1, 2), strip_accents="unicode", lowercase=True,
+    )
+
+def make_models():
+    return {
+        "Linear SVM": Pipeline([
+            ("tfidf", make_vectoriser()),
+            ("clf", LinearSVC(C=1.0, class_weight="balanced",
+                              max_iter=5000, random_state=SEED)),
+        ]),
+        "Neural network (MLP)": Pipeline([
+            ("tfidf", make_vectoriser()),
+            ("clf", MLPClassifier(hidden_layer_sizes=(64,), activation="relu",
+                                  solver="adam", alpha=1e-4, batch_size=256,
+                                  learning_rate_init=1e-3, max_iter=30,
+                                  early_stopping=True, n_iter_no_change=3,
+                                  validation_fraction=0.1, random_state=SEED)),
+        ]),
+    }
+
+def precision_at_capacity(y_true, score, capacity=0.01):
+    """Precision over the top-scoring slice a moderation queue can review."""
+    k = max(1, int(round(len(y_true) * capacity)))
+    top = np.argsort(score)[::-1][:k]
+    return float(y_true[top].mean()), k
+\end{lstlisting}
+
+\subsection{Issues Encountered and How They Were Addressed}
+
+\begin{enumerate}
+    \item \textbf{The first advertisement selected had closed.} The 2026-start version of
+    this role expired before submission. Rather than cite a dead link, the employer's job
+    index was searched for the live equivalent; the 2027-start listing was confirmed open
+    (an active \emph{Apply} control, closing 30 August 2026) and substituted. The text of
+    the two postings is materially identical.
+
+    \item \textbf{The obvious toxicity dataset was behind a login.} The widely used Jigsaw
+    release is distributed through Kaggle, which requires an account and so fails the
+    specification's requirement that the link be accessible. The original Wulczyn et al.
+    release on Figshare was used instead: same underlying annotations, CC0 licence, no
+    account.
+
+    \item \textbf{Encoded whitespace polluted the features.} Wikipedia comments store line
+    and tab breaks as the literal strings \texttt{NEWLINE\_TOKEN} and \texttt{TAB\_TOKEN}.
+    Left in place these become two of the highest-frequency terms in the vocabulary and
+    carry no signal. They are stripped before vectorising.
+
+    \item \textbf{The two estimators expose different score interfaces.}
+    \texttt{LinearSVC} provides \texttt{decision\_function} but not
+    \texttt{predict\_proba}. Because both ROC and precision-recall curves depend only on
+    the \emph{ranking} induced by the score, the raw decision values are used directly;
+    no calibration step is needed for the curves, though it would be needed before
+    interpreting a score as a probability in production.
+
+    \item \textbf{Neural network runtime.} A dense hidden layer over a full-vocabulary
+    sparse matrix was too slow to cross-validate on the larger corpus. The vocabulary was
+    capped at 20,000 features and the network reduced to a single 64-unit hidden layer
+    with early stopping. Both models share the identical vectoriser configuration so the
+    comparison stays fair.
+
+    \item \textbf{Class imbalance made the default threshold useless for the SVM.} At the
+    default decision boundary the minority class was barely predicted at all.
+    \texttt{class\_weight="balanced"} was enabled, which is why the SVM's operating point
+    favours recall over precision --- a choice revisited in
+    Section~\ref{sec:Data Analysis}.
+\end{enumerate}
+
+\subsection{Use of Generative AI}
+
+Claude (Anthropic) was used throughout, in the manner declared on
+page~\pageref{sec:Data Analysis}. Representative prompts:
+
+\begin{itemize}
+    \item ``Find live machine learning engineer job advertisements in Australia and verify
+    the listing URLs actually resolve.''
+    \item ``Propose two publicly available datasets relevant to content-moderation triage
+    that download without an account, and confirm the download URLs respond.''
+    \item ``Write a stratified cross-validation harness comparing a linear SVM and an MLP,
+    fitting the vectoriser inside each fold, and report precision, recall, F1, ROC-AUC and
+    PR-AUC plus a paired $t$-test across folds.''
+    \item ``Condense this paragraph to at most 50 words without losing the citation.''
+\end{itemize}
+
+The model's first draft of the evaluation harness fitted the TF-IDF vectoriser once
+outside the cross-validation loop. This was identified against
+\citet{page2024evaluating} and corrected before any reported result was generated; the
+corrected form is the one shown in Listing~\ref{lst:models}.
+
+%----------------------------------
+\section{Link to GitHub Repository}
+\label{sec:Link to GitHub Repository}
+%----------------------------------
+
+All code, the downloaded-data manifest and the generated results are available at:
+
+\update{create the public repository, push the \texttt{assignment/} folder, and paste the
+URL here}
+\url{https://github.com/YOUR-USERNAME/cosc2669-individual-task-1}
+
+\clearpage
+
+%----------------------------------
+\section{Cover Letter}
+\label{sec:Cover Letter}
+%----------------------------------
+
+\newpage
+
+\thispagestyle{empty}
+
+\noindent
+{\large\textbf{Heet Chanchad}}\\[2pt]
+Melbourne VIC, Australia\\
+s4218211@student.rmit.edu.au
+
+\vspace{18pt}
+
+\noindent 14 August 2026
+
+\vspace{14pt}
+
+\noindent
+Early Careers Team\\
+Trust \& Safety Engineering\\
+TikTok Australia\\
+Sydney NSW
+
+\vspace{14pt}
+
+\noindent\textbf{Re: Machine Learning Engineer Graduate (Trust and Safety Engineering) ---
+2027 Start}
+
+\vspace{10pt}
+
+\noindent Dear Hiring Team,
+
+\vspace{8pt}
+
+\noindent I am writing to apply for the Machine Learning Engineer Graduate role in Trust
+and Safety Engineering. I am completing a \todo{insert your degree, e.g.\ Master of Data
+Science} at RMIT University and expect to graduate in \todo{insert month and year}, which
+meets the onboarding window described in the advertisement. I want to spend my career
+building systems that reduce harm at scale, not systems that maximise attention, and your
+team is one of the few places where that is the explicit brief.
+
+\vspace{8pt}
+
+\noindent The advertisement asks for someone who can ``develop and build up
+highly-scalable classifiers'' and ``work on model iterations''. My most recent project is
+that problem in miniature. I built a content-triage pipeline over two public corpora ---
+24,783 crowd-labelled tweets and 159,686 Wikipedia Talk comments carrying 1.6 million
+toxicity judgements --- and compared a linear support vector machine against a
+feed-forward neural network under stratified five-fold cross validation.
+
+\vspace{8pt}
+
+\noindent Two findings from that work speak directly to your team's problem. First, I
+evaluated the models the way a moderation queue actually runs. Because only 5.8\% and
+9.6\% of the two corpora are removal-worthy, accuracy is close to meaningless, so I
+reported precision, recall and area under the precision-recall curve, and measured
+precision across the top 1\% of the ranked stream --- the slice a fixed review team could
+genuinely process in a day. Second, I tested whether a model survives a change of source.
+A classifier trained on one corpus and applied to the other collapsed, because the two
+label schemes disagree about whether offensive language is the same thing as hate speech.
+That failure is invisible in single-dataset metrics and would surface in production as
+mass wrongful removals of ordinary speech.
+
+\vspace{8pt}
+
+\noindent I also treat fairness as part of the engineering rather than a review step after
+it. Published work shows hate-speech classifiers systematically over-flag African-American
+English, and the Wikipedia corpus ships annotator demographics precisely because who
+labels the data decides what counts as toxic. Before I would ship a classifier, I would
+want its error rates broken down by dialect and community, not just its headline score.
+
+\vspace{8pt}
+
+\noindent I would welcome the opportunity to discuss how I could contribute to the team.
+Thank you for your consideration.
+
+\vspace{16pt}
+
+\noindent Yours sincerely,
+
+\vspace{20pt}
+
+\noindent Heet Chanchad
+
+\vspace{10pt}
+
+\noindent\wordcount{398}

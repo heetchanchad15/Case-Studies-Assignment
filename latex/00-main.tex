@@ -1,0 +1,103 @@
+%% Individual Task 1: Part 1 -- Case Studies in Data Science (COSC2669/COSC2816)
+%% Based on the ACM "acmart" class, manuscript format.
+
+\documentclass[manuscript,screen,review,nonacm]{acmart}
+
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+
+%% Fonts used in the template cannot be substituted; margin
+%% adjustments are not allowed.
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+\input{00_macros}
+
+\begin{document}
+
+\title{Individual Task 1: Part 1}
+
+\author{Heet Chanchad (s4218211)}
+\affiliation{%
+  \institution{RMIT University}
+  \city{Melbourne}
+  \country{Australia}}
+\email{s4218211@student.rmit.edu.au}
+
+\renewcommand{\shortauthors}{Chanchad}
+
+\begin{abstract}
+  This report examines the role of Machine Learning Engineer in Trust and Safety
+  Engineering, using a live graduate advertisement at TikTok as its anchor. The
+  professional problem the role exists to solve is triage under a fixed review budget: a
+  platform receives far more user-generated content each day than any moderation team can
+  read, so a classifier must rank items by the probability of violation and spend scarce
+  human attention where it changes an outcome. Two public corpora of crowd-labelled user
+  text are used to study that problem --- 24,783 annotated tweets and 159,686 annotated
+  Wikipedia Talk comments --- and two machine learning algorithms, a linear support vector
+  machine and a feed-forward neural network, are compared under stratified cross
+  validation. Because the removal-worthy class covers only 5.8\% and 9.6\% of the two
+  corpora respectively, the evaluation deliberately avoids accuracy in favour of
+  precision, recall, area under the precision-recall curve, and precision over the slice
+  of the ranked stream a fixed review team could actually process. The analysis finds that
+  the two data sources are complementary in what they teach about model choice but
+  directly contradictory in what they teach about labels, and that this contradiction is
+  invisible to any single-dataset evaluation.
+
+  \textbf{Overleaf project URL:} \update{paste your read-only Overleaf project link here
+  before submitting} \url{https://www.overleaf.com/read/YOUR-PROJECT-LINK}
+\end{abstract}
+
+\maketitle
+
+\input{01-role}
+\input{02-dataset}
+\input{03-analysis}
+
+\clearpage
+
+\begin{center}
+    \noindent \textcolor{purple}{\emph{-- Content below this line does not count for the page/word limit. --}}
+\end{center}
+
+\section*{Generative AI Attribution and Declaration}
+
+\noindent\textbf{AI Attribution Statement} (generated with the AI Attribution Toolkit,
+\url{https://aiattribution.github.io/}):
+
+\begin{quote}
+\emph{This work was produced with the assistance of generative AI. AI was used to draft
+and edit prose, to write and debug the analysis code, and to structure the document.
+Dataset selection, the framing of the case study, the interpretation of results, and all
+final judgements are the author's own. All AI-assisted output was reviewed, tested against
+the data, and corrected by the author.}
+\end{quote}
+
+\noindent Specifically, Claude (Anthropic) was used to: locate and verify the public
+corpora and their access URLs; draft the Python analysis pipeline in
+Appendix~\ref{sec:Link to GitHub Repository}; draft and condense prose against the word
+limits in this specification; and format the \LaTeX{} and \BibTeX{} sources. Every numeric
+result reported in Section~\ref{sec:Data Analysis} was produced by executing the code in
+the linked repository, not by the language model. A record of the prompts, intermediate
+outputs and issues encountered is given in Appendix~\ref{sec:Development Process}.
+
+\begin{acks}
+I acknowledge the people of the Woi Wurrung and Boon Wurrung language groups of the
+eastern Kulin Nation, on whose unceded lands RMIT University's Melbourne campuses stand. I
+respectfully recognise their Ancestors and Elders, past and present.
+
+I thank Thomas Davidson and colleagues, and Ellery Wulczyn and colleagues, for releasing
+the corpora that made this analysis possible.
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{99-references}
+
+\appendix
+\input{99-appendix}
+
+\end{document}

@@ -1,0 +1,41 @@
+%Add any additional packages and commands here
+
+\newcommand{\wordcount}[1]{\noindent\textbf{[Word count: #1]}} %macro for word count
+
+\newcommand{\todo}[1]{\textcolor{red}{\bf [[TODO: #1]]}}
+\newcommand{\instructions}[1]{\textcolor{blue}{\textbf{[[Remove before submitting:} #1]]}} %Instructions to be removed before submitting
+
+\newcommand{\update}[1]{\textcolor{blue}{\textbf{[[Update before submitting:} #1]]}} %Instructions to be removed before submitting
+
+%\newcommand{\instructions}[1]{} %Instructions to be removed before submitting
+
+%extra packages for the tables in the appendix
+\usepackage{longtable}
+\usepackage{array}
+\renewcommand{\arraystretch}{1.5}
+
+%--- additions for Individual Task 1 -------------------------------------
+\usepackage{listings}          % source-code listings in the appendix
+\usepackage{multirow}          % merged cells in the results tables
+
+\lstdefinestyle{pycode}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{ACMPurple},
+  commentstyle=\color{ACMGreen}\itshape,
+  stringstyle=\color{ACMDarkBlue},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=6pt,
+  frame=single,
+  rulecolor=\color{gray!40},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  tabsize=4,
+  captionpos=b,
+  xleftmargin=12pt,
+}
+\lstset{style=pycode}

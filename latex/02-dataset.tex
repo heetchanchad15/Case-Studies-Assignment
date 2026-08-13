@@ -1,0 +1,65 @@
+%----------------------------------
+\section{Data Set}
+\label{sec:Data Set}
+%----------------------------------
+
+%%----------------------------------
+\subsection{Description of the Data Sets}
+\label{subsec:Description of the Data Sets}
+%----------------------------------
+
+Two public, account-free corpora of crowd-labelled user text underpin the analysis
+(Table~\ref{tab:datasets}). Davidson et al.'s hate speech corpus~\cite{davidson2017automated}
+holds 24,783 tweets, each judged by at least three CrowdFlower annotators and assigned one
+of three classes: 5.77\% hate speech, 77.43\% offensive language, 16.80\% neither.
+Wulczyn et al.'s Wikipedia Talk corpus~\cite{wulczyn2017ex} holds 159,686 discussion
+comments carrying 1,598,289 toxicity judgements from 4,301 annotators, roughly ten per
+comment; 9.62\% are toxic by majority vote. A companion file records each annotator's
+demographics. Both download without an account from the URLs in Table~\ref{tab:datasets}.
+
+\wordcount{90}
+
+\begin{table}[h]
+\centering
+\caption{The two public corpora used in this case study. Class balance is computed from
+the raw label files; the positive class is the item a moderator would be asked to act on.}
+\label{tab:datasets}
+\begin{tabular}{lp{4.6cm}p{4.6cm}}
+\toprule
+ & \textbf{Dataset A: Davidson et al.} & \textbf{Dataset B: Wulczyn et al.} \\
+\midrule
+Source & Twitter & English Wikipedia talk pages \\
+URL & \url{https://github.com/t-davidson/hate-speech-and-offensive-language} &
+      \url{https://figshare.com/articles/dataset/Wikipedia_Talk_Labels_Toxicity/4563973} \\
+Instances & 24,783 tweets & 159,686 comments \\
+File size & 2.4~MB (CSV) & 109~MB (two TSV files) \\
+Attributes & \texttt{count}, \texttt{hate\_speech}, \texttt{offensive\_language},
+             \texttt{neither}, \texttt{class}, \texttt{tweet} &
+             \texttt{rev\_id}, \texttt{comment}, \texttt{year}, \texttt{logged\_in},
+             \texttt{ns}, \texttt{sample}, \texttt{split} \\
+Annotations & $\geq 3$ per tweet (median 3, max 9) & 1,598,289 judgements, 4,301
+              annotators, $\approx$10 per comment \\
+Label scheme & 3 classes: hate speech / offensive / neither & Binary toxicity per
+               annotator, aggregated by majority \\
+Positive class & Hate speech (5.77\%, $n=1{,}430$) & Toxic (9.62\%, $n=15{,}362$) \\
+Mean length & 85.4 characters & 446.9 characters \\
+Licence & Public research release (MIT) & CC0 1.0 Public Domain \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%----------------------------------
+\subsection{Rationale for Selection}
+\label{subsec:Rationale for Selection}
+%----------------------------------
+
+Both corpora are exactly the modality the advertised role's classifiers consume: short,
+user-generated, crowd-labelled text. Their label schemes deliberately disagree ---
+Davidson separates hate speech from merely offensive language, while Wikipedia collapses
+both into ``toxic'' --- which lets me test whether a triage model survives a change of
+platform, the failure mode that matters in production. Limitations are real: both are
+English-only, Davidson's lexicon-seeded sampling over-represents slurs, Wikipedia talk
+pages are not video comments, neither includes audio or vision, and majority-vote labels
+discard annotator disagreement.
+
+\wordcount{83}
