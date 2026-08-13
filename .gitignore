@@ -18,3 +18,5 @@ venv/
 *.fls
 
 build/
+node_modules/
+presentation/package-lock.json
