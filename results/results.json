@@ -1,0 +1,741 @@
+{
+  "config": {
+    "seed": 42,
+    "folds": 5,
+    "review_capacity": 0.01,
+    "davidson_n": 24783,
+    "davidson_pos_rate": 0.05770084332001776,
+    "wikipedia_n": 159686,
+    "wikipedia_pos_rate": 0.09620129504151897
+  },
+  "davidson": {
+    "per_fold": {
+      "Linear SVM": [
+        {
+          "fold": 1,
+          "tp": 113,
+          "fp": 189,
+          "fn": 173,
+          "tn": 4482,
+          "accuracy": 0.9269719588460763,
+          "precision": 0.3741721854304636,
+          "recall": 0.3951048951048951,
+          "f1": 0.3843537414965986,
+          "roc_auc": 0.8517638965615844,
+          "pr_auc": 0.3196549234804771,
+          "precision_at_1pct": 0.58,
+          "queue_size": 50,
+          "seconds": 1.1
+        },
+        {
+          "fold": 2,
+          "tp": 126,
+          "fp": 242,
+          "fn": 160,
+          "tn": 4429,
+          "accuracy": 0.918902562033488,
+          "precision": 0.3423913043478261,
+          "recall": 0.4405594405594406,
+          "f1": 0.3853211009174312,
+          "roc_auc": 0.8296365911972847,
+          "pr_auc": 0.3469374170030325,
+          "precision_at_1pct": 0.66,
+          "queue_size": 50,
+          "seconds": 1.0
+        },
+        {
+          "fold": 3,
+          "tp": 120,
+          "fp": 191,
+          "fn": 166,
+          "tn": 4480,
+          "accuracy": 0.9279806334476498,
+          "precision": 0.3858520900321543,
+          "recall": 0.4195804195804196,
+          "f1": 0.4020100502512563,
+          "roc_auc": 0.8254940841646043,
+          "pr_auc": 0.35124160715039743,
+          "precision_at_1pct": 0.7,
+          "queue_size": 50,
+          "seconds": 1.2
+        },
+        {
+          "fold": 4,
+          "tp": 99,
+          "fp": 231,
+          "fn": 187,
+          "tn": 4439,
+          "accuracy": 0.9156577885391445,
+          "precision": 0.3,
+          "recall": 0.34615384615384615,
+          "f1": 0.32142857142857145,
+          "roc_auc": 0.8047079259070692,
+          "pr_auc": 0.2823342114819869,
+          "precision_at_1pct": 0.52,
+          "queue_size": 50,
+          "seconds": 1.1
+        },
+        {
+          "fold": 5,
+          "tp": 130,
+          "fp": 230,
+          "fn": 156,
+          "tn": 4440,
+          "accuracy": 0.9221146085552865,
+          "precision": 0.3611111111111111,
+          "recall": 0.45454545454545453,
+          "f1": 0.4024767801857585,
+          "roc_auc": 0.8339059762507299,
+          "pr_auc": 0.3841430001112389,
+          "precision_at_1pct": 0.7,
+          "queue_size": 50,
+          "seconds": 1.1
+        }
+      ],
+      "Neural network (MLP)": [
+        {
+          "fold": 1,
+          "tp": 10,
+          "fp": 6,
+          "fn": 276,
+          "tn": 4665,
+          "accuracy": 0.9431107524712528,
+          "precision": 0.625,
+          "recall": 0.03496503496503497,
+          "f1": 0.06622516556291391,
+          "roc_auc": 0.8018269998038783,
+          "pr_auc": 0.27914423662453997,
+          "precision_at_1pct": 0.52,
+          "queue_size": 50,
+          "seconds": 25.7
+        },
+        {
+          "fold": 2,
+          "tp": 49,
+          "fp": 29,
+          "fn": 237,
+          "tn": 4642,
+          "accuracy": 0.9463385111962881,
+          "precision": 0.6282051282051282,
+          "recall": 0.17132867132867133,
+          "f1": 0.2692307692307692,
+          "roc_auc": 0.812491672318262,
+          "pr_auc": 0.35678562164241606,
+          "precision_at_1pct": 0.72,
+          "queue_size": 50,
+          "seconds": 25.2
+        },
+        {
+          "fold": 3,
+          "tp": 50,
+          "fp": 35,
+          "fn": 236,
+          "tn": 4636,
+          "accuracy": 0.9453298365947146,
+          "precision": 0.5882352941176471,
+          "recall": 0.17482517482517482,
+          "f1": 0.2695417789757412,
+          "roc_auc": 0.8024310842229917,
+          "pr_auc": 0.3445804623238848,
+          "precision_at_1pct": 0.64,
+          "queue_size": 50,
+          "seconds": 27.5
+        },
+        {
+          "fold": 4,
+          "tp": 32,
+          "fp": 24,
+          "fn": 254,
+          "tn": 4646,
+          "accuracy": 0.9439063761097659,
+          "precision": 0.5714285714285714,
+          "recall": 0.11188811188811189,
+          "f1": 0.1871345029239766,
+          "roc_auc": 0.7689088213713481,
+          "pr_auc": 0.2826381403963257,
+          "precision_at_1pct": 0.58,
+          "queue_size": 50,
+          "seconds": 22.3
+        },
+        {
+          "fold": 5,
+          "tp": 52,
+          "fp": 24,
+          "fn": 234,
+          "tn": 4646,
+          "accuracy": 0.9479418886198547,
+          "precision": 0.6842105263157895,
+          "recall": 0.18181818181818182,
+          "f1": 0.287292817679558,
+          "roc_auc": 0.8180017519953281,
+          "pr_auc": 0.37025778177279073,
+          "precision_at_1pct": 0.74,
+          "queue_size": 50,
+          "seconds": 24.9
+        }
+      ]
+    },
+    "summary": [
+      {
+        "model": "Linear SVM",
+        "metric": "accuracy",
+        "mean": 0.922325510284329,
+        "std": 0.00523902351988771
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "precision",
+        "mean": 0.35270533818431105,
+        "std": 0.03359472307651838
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "recall",
+        "mean": 0.4111888111888112,
+        "std": 0.0427232094940026
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "f1",
+        "mean": 0.3791180488559232,
+        "std": 0.033405239841115084
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "roc_auc",
+        "mean": 0.8291016948162545,
+        "std": 0.016919023600630384
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "pr_auc",
+        "mean": 0.3368622318454265,
+        "std": 0.0381219861230001
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "precision_at_1pct",
+        "mean": 0.632,
+        "std": 0.07949842765740715
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "accuracy",
+        "mean": 0.9453254729983751,
+        "std": 0.0019229351996520726
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "precision",
+        "mean": 0.6194159040134272,
+        "std": 0.043536737909687866
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "recall",
+        "mean": 0.13496503496503495,
+        "std": 0.06252780691020086
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "f1",
+        "mean": 0.2158850068745918,
+        "std": 0.09226125212743055
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "roc_auc",
+        "mean": 0.8007320659423616,
+        "std": 0.019061314466673696
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "pr_auc",
+        "mean": 0.32668124855199143,
+        "std": 0.04279349325354609
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "precision_at_1pct",
+        "mean": 0.64,
+        "std": 0.09273618495495703
+      }
+    ],
+    "paired_tests": [
+      {
+        "metric": "f1",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.3791180488559232,
+        "mean_b": 0.2158850068745918,
+        "mean_diff": 0.16323304198133143,
+        "t": 4.193208948240082,
+        "p_value": 0.013770875300016265,
+        "significant_at_05": true
+      },
+      {
+        "metric": "pr_auc",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.3368622318454265,
+        "mean_b": 0.32668124855199143,
+        "mean_diff": 0.01018098329343512,
+        "t": 1.1927778152998687,
+        "p_value": 0.2988726194900753,
+        "significant_at_05": false
+      },
+      {
+        "metric": "roc_auc",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.8291016948162545,
+        "mean_b": 0.8007320659423616,
+        "mean_diff": 0.028369628873892872,
+        "t": 4.4041258805056,
+        "p_value": 0.011653715517777906,
+        "significant_at_05": true
+      },
+      {
+        "metric": "recall",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.4111888111888112,
+        "mean_b": 0.13496503496503495,
+        "mean_diff": 0.2762237762237762,
+        "t": 12.44441736575887,
+        "p_value": 0.0002397644198323897,
+        "significant_at_05": true
+      },
+      {
+        "metric": "precision",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.35270533818431105,
+        "mean_b": 0.6194159040134272,
+        "mean_diff": -0.2667105658291162,
+        "t": -13.37137180055766,
+        "p_value": 0.00018089433720725807,
+        "significant_at_05": true
+      }
+    ]
+  },
+  "wikipedia": {
+    "per_fold": {
+      "Linear SVM": [
+        {
+          "fold": 1,
+          "tp": 2564,
+          "fp": 1388,
+          "fn": 509,
+          "tn": 27477,
+          "accuracy": 0.9406036696098691,
+          "precision": 0.6487854251012146,
+          "recall": 0.8343638138626749,
+          "f1": 0.7299644128113879,
+          "roc_auc": 0.9619931851704375,
+          "pr_auc": 0.84777407689987,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 27.5
+        },
+        {
+          "fold": 2,
+          "tp": 2502,
+          "fp": 1469,
+          "fn": 570,
+          "tn": 27396,
+          "accuracy": 0.9361555562513699,
+          "precision": 0.6300679929488794,
+          "recall": 0.814453125,
+          "f1": 0.7104926877750959,
+          "roc_auc": 0.9595453500761448,
+          "pr_auc": 0.8385879390459713,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 27.0
+        },
+        {
+          "fold": 3,
+          "tp": 2544,
+          "fp": 1413,
+          "fn": 528,
+          "tn": 27452,
+          "accuracy": 0.9392240974418387,
+          "precision": 0.6429112964366944,
+          "recall": 0.828125,
+          "f1": 0.72385830132309,
+          "roc_auc": 0.9612942139954674,
+          "pr_auc": 0.8449334318247547,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 26.7
+        },
+        {
+          "fold": 4,
+          "tp": 2467,
+          "fp": 1481,
+          "fn": 605,
+          "tn": 27384,
+          "accuracy": 0.9346839089457369,
+          "precision": 0.6248733535967579,
+          "recall": 0.8030598958333334,
+          "f1": 0.7028490028490029,
+          "roc_auc": 0.9549328106505139,
+          "pr_auc": 0.8263963489115389,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 27.1
+        },
+        {
+          "fold": 5,
+          "tp": 2522,
+          "fp": 1330,
+          "fn": 551,
+          "tn": 27534,
+          "accuracy": 0.9411027961298807,
+          "precision": 0.6547248182762202,
+          "recall": 0.8206963878945656,
+          "f1": 0.7283754512635379,
+          "roc_auc": 0.9586379099885058,
+          "pr_auc": 0.8389616860932221,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 27.0
+        }
+      ],
+      "Neural network (MLP)": [
+        {
+          "fold": 1,
+          "tp": 2144,
+          "fp": 409,
+          "fn": 929,
+          "tn": 28456,
+          "accuracy": 0.9581063310163441,
+          "precision": 0.8397963180571876,
+          "recall": 0.6976895541815815,
+          "f1": 0.7621756132243157,
+          "roc_auc": 0.9622461666513251,
+          "pr_auc": 0.8454734491889412,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 137.7
+        },
+        {
+          "fold": 2,
+          "tp": 2074,
+          "fp": 408,
+          "fn": 998,
+          "tn": 28457,
+          "accuracy": 0.9559758274102138,
+          "precision": 0.8356164383561644,
+          "recall": 0.6751302083333334,
+          "f1": 0.7468491177529708,
+          "roc_auc": 0.9589159270977684,
+          "pr_auc": 0.835768963258708,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 138.8
+        },
+        {
+          "fold": 3,
+          "tp": 2093,
+          "fp": 367,
+          "fn": 979,
+          "tn": 28498,
+          "accuracy": 0.9578545260982559,
+          "precision": 0.8508130081300813,
+          "recall": 0.6813151041666666,
+          "f1": 0.7566883586406363,
+          "roc_auc": 0.9600276768830477,
+          "pr_auc": 0.8430133886183498,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 137.1
+        },
+        {
+          "fold": 4,
+          "tp": 1960,
+          "fp": 306,
+          "fn": 1112,
+          "tn": 28559,
+          "accuracy": 0.9556000876726054,
+          "precision": 0.8649602824360106,
+          "recall": 0.6380208333333334,
+          "f1": 0.7343574372424129,
+          "roc_auc": 0.9556945621048414,
+          "pr_auc": 0.8298171457728877,
+          "precision_at_1pct": 1.0,
+          "queue_size": 319,
+          "seconds": 122.4
+        },
+        {
+          "fold": 5,
+          "tp": 2078,
+          "fp": 334,
+          "fn": 995,
+          "tn": 28530,
+          "accuracy": 0.9583868240598679,
+          "precision": 0.8615257048092869,
+          "recall": 0.6762121705174097,
+          "f1": 0.7577028258887876,
+          "roc_auc": 0.961070968138201,
+          "pr_auc": 0.8453617843138019,
+          "precision_at_1pct": 0.9968652037617555,
+          "queue_size": 319,
+          "seconds": 119.9
+        }
+      ]
+    },
+    "summary": [
+      {
+        "model": "Linear SVM",
+        "metric": "accuracy",
+        "mean": 0.9383540056757391,
+        "std": 0.0028141022697221302
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "precision",
+        "mean": 0.6402725772719533,
+        "std": 0.012545600006031693
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "recall",
+        "mean": 0.8201396445181148,
+        "std": 0.012149662323159565
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "f1",
+        "mean": 0.7191079712044229,
+        "std": 0.01188372109019348
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "roc_auc",
+        "mean": 0.9592806939762137,
+        "std": 0.002774850215176476
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "pr_auc",
+        "mean": 0.8393306965550714,
+        "std": 0.008225972899163943
+      },
+      {
+        "model": "Linear SVM",
+        "metric": "precision_at_1pct",
+        "mean": 1.0,
+        "std": 0.0
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "accuracy",
+        "mean": 0.9571847192514575,
+        "std": 0.001295718155321565
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "precision",
+        "mean": 0.8505423503577461,
+        "std": 0.0129116628996323
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "recall",
+        "mean": 0.6736735741064649,
+        "std": 0.021879467888148166
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "f1",
+        "mean": 0.7515546705498247,
+        "std": 0.01112256772663261
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "roc_auc",
+        "mean": 0.9595910601750367,
+        "std": 0.0025034403334530386
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "pr_auc",
+        "mean": 0.8398869462305377,
+        "std": 0.006879610714998487
+      },
+      {
+        "model": "Neural network (MLP)",
+        "metric": "precision_at_1pct",
+        "mean": 0.9993730407523511,
+        "std": 0.0014019234968650793
+      }
+    ],
+    "paired_tests": [
+      {
+        "metric": "f1",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.7191079712044229,
+        "mean_b": 0.7515546705498247,
+        "mean_diff": -0.032446699345401744,
+        "t": -28.403643313754817,
+        "p_value": 9.142706608695551e-06,
+        "significant_at_05": true
+      },
+      {
+        "metric": "pr_auc",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.8393306965550714,
+        "mean_b": 0.8398869462305377,
+        "mean_diff": -0.0005562496754663249,
+        "t": -0.3015753607746383,
+        "p_value": 0.778004160338736,
+        "significant_at_05": false
+      },
+      {
+        "metric": "roc_auc",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.9592806939762137,
+        "mean_b": 0.9595910601750367,
+        "mean_diff": -0.00031036619882280904,
+        "t": -0.48821536111346253,
+        "p_value": 0.6509516462380228,
+        "significant_at_05": false
+      },
+      {
+        "metric": "recall",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.8201396445181148,
+        "mean_b": 0.6736735741064649,
+        "mean_diff": 0.14646607041164986,
+        "t": 29.413876238629204,
+        "p_value": 7.954321058724742e-06,
+        "significant_at_05": true
+      },
+      {
+        "metric": "precision",
+        "model_a": "Linear SVM",
+        "model_b": "Neural network (MLP)",
+        "mean_a": 0.6402725772719533,
+        "mean_b": 0.8505423503577461,
+        "mean_diff": -0.2102697730857929,
+        "t": -26.081768042794003,
+        "p_value": 1.2839819345926174e-05,
+        "significant_at_05": true
+      }
+    ]
+  },
+  "transfer": [
+    {
+      "model": "Linear SVM",
+      "trained_on": "wikipedia",
+      "tested_on": "davidson",
+      "tp": 1183,
+      "fp": 16986,
+      "fn": 247,
+      "tn": 6367,
+      "accuracy": 0.30464431263366015,
+      "precision": 0.06511090318674666,
+      "recall": 0.8272727272727273,
+      "f1": 0.12072044492065921,
+      "roc_auc": 0.5746552980270276,
+      "pr_auc": 0.08011252666539564,
+      "flag_rate": 0.7331235120848969,
+      "base_rate": 0.05770084332001776
+    },
+    {
+      "model": "Neural network (MLP)",
+      "trained_on": "wikipedia",
+      "tested_on": "davidson",
+      "tp": 978,
+      "fp": 13944,
+      "fn": 452,
+      "tn": 9409,
+      "accuracy": 0.4191179437517653,
+      "precision": 0.06554081222356252,
+      "recall": 0.6839160839160839,
+      "f1": 0.11961839530332681,
+      "roc_auc": 0.5781822404033683,
+      "pr_auc": 0.08332567919538085,
+      "flag_rate": 0.6021062825323811,
+      "base_rate": 0.05770084332001776
+    },
+    {
+      "model": "Linear SVM",
+      "trained_on": "davidson",
+      "tested_on": "wikipedia",
+      "tp": 2808,
+      "fp": 6246,
+      "fn": 12554,
+      "tn": 138078,
+      "accuracy": 0.882268952819909,
+      "precision": 0.3101391650099404,
+      "recall": 0.1827886993881005,
+      "f1": 0.23001310615989515,
+      "roc_auc": 0.6724518391478393,
+      "pr_auc": 0.2341653273880832,
+      "flag_rate": 0.0566987713387523,
+      "base_rate": 0.09620129504151897
+    },
+    {
+      "model": "Neural network (MLP)",
+      "trained_on": "davidson",
+      "tested_on": "wikipedia",
+      "tp": 837,
+      "fp": 390,
+      "fn": 14525,
+      "tn": 143934,
+      "accuracy": 0.90659794847388,
+      "precision": 0.6821515892420538,
+      "recall": 0.05448509308683765,
+      "f1": 0.10091024172644524,
+      "roc_auc": 0.6722166256905341,
+      "pr_auc": 0.239656940908715,
+      "flag_rate": 0.00768382951542402,
+      "base_rate": 0.09620129504151897
+    }
+  ],
+  "disagreement": [
+    {
+      "model": "Linear SVM",
+      "davidson_class": "hate speech",
+      "n": 1430,
+      "flagged_rate": 0.8272727272727273
+    },
+    {
+      "model": "Linear SVM",
+      "davidson_class": "offensive not hate",
+      "n": 19190,
+      "flagged_rate": 0.8272016675351745
+    },
+    {
+      "model": "Linear SVM",
+      "davidson_class": "neither",
+      "n": 4163,
+      "flagged_rate": 0.26711506125390344
+    },
+    {
+      "model": "Neural network (MLP)",
+      "davidson_class": "hate speech",
+      "n": 1430,
+      "flagged_rate": 0.6839160839160839
+    },
+    {
+      "model": "Neural network (MLP)",
+      "davidson_class": "offensive not hate",
+      "n": 19190,
+      "flagged_rate": 0.7078686816050026
+    },
+    {
+      "model": "Neural network (MLP)",
+      "davidson_class": "neither",
+      "n": 4163,
+      "flagged_rate": 0.08647609896709103
+    }
+  ]
+}

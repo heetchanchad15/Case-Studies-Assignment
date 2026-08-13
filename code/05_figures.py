@@ -73,13 +73,13 @@ for ax, (corpus, title) in zip(axes, CORPORA):
         auc = np.mean([f["pr_auc"] for f in R[corpus]["per_fold"][m]])
         ax.plot(rec, prec, label=f"{m} (PR-AUC {auc:.3f})", **STYLE[m])
     ax.axhline(base, color=MUTED, ls=":", lw=1.2)
-    ax.annotate(f"base rate {base * 100:.1f}%", xy=(0.98, base), xytext=(0.98, base + 0.05),
-                ha="right", fontsize=7.5, color=MUTED)
+    ax.annotate(f"base rate {base * 100:.1f}%", xy=(0.5, base), xytext=(0.5, base + 0.035),
+                ha="center", fontsize=7.5, color=MUTED)
     ax.set_xlabel("Recall")
     ax.set_ylabel("Precision")
     ax.set_title(title, fontsize=9, color=INK)
     ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1.02)
+    ax.set_ylim(0, 1.16)
     ax.legend(loc="upper right", fontsize=7.5, frameon=False)
     tidy(ax)
 fig.tight_layout()
@@ -114,7 +114,7 @@ print("wrote fig_roc_curves.pdf")
 # ------------------------------------------------- Figure 3: where they disagree
 dis = R["disagreement"]
 classes = ["hate speech", "offensive not hate", "neither"]
-fig, ax = plt.subplots(figsize=(5.4, 3.0))
+fig, ax = plt.subplots(figsize=(5.8, 3.0))
 x = np.arange(len(classes))
 width = 0.36
 for i, m in enumerate(MODELS):
@@ -130,7 +130,7 @@ for i, m in enumerate(MODELS):
 ax.set_xticks(x)
 ax.set_xticklabels(["Hate speech\n(should flag)", "Offensive,\nnot hate",
                     "Neither\n(should not flag)"], fontsize=8)
-ax.set_ylabel("Flagged by a Wikipedia-trained model (%)")
+ax.set_ylabel("Share of class flagged (%)")
 ax.set_ylim(0, 105)
 ax.legend(fontsize=7.5, frameon=False, loc="upper right")
 tidy(ax)

@@ -22,13 +22,13 @@ URL = ("https://au.gradconnection.com/employers/tiktok/jobs/"
        "engineering-2027-start-5/")
 
 ss = getSampleStyleSheet()
-H1 = ParagraphStyle("H1", parent=ss["Heading1"], fontSize=15, spaceAfter=4)
-H2 = ParagraphStyle("H2", parent=ss["Heading2"], fontSize=11.5, spaceBefore=10, spaceAfter=4)
-BODY = ParagraphStyle("BODY", parent=ss["BodyText"], fontSize=9.5, leading=13,
-                      alignment=TA_JUSTIFY, spaceAfter=5)
-META = ParagraphStyle("META", parent=ss["BodyText"], fontSize=8.5, leading=11,
-                      textColor="#444444", spaceAfter=2)
-BULLET = ParagraphStyle("BULLET", parent=BODY, spaceAfter=2)
+H1 = ParagraphStyle("H1", parent=ss["Heading1"], fontSize=13, leading=16, spaceAfter=3)
+H2 = ParagraphStyle("H2", parent=ss["Heading2"], fontSize=10, spaceBefore=7, spaceAfter=3)
+BODY = ParagraphStyle("BODY", parent=ss["BodyText"], fontSize=8.2, leading=10.6,
+                      alignment=TA_JUSTIFY, spaceAfter=3.5)
+META = ParagraphStyle("META", parent=ss["BodyText"], fontSize=7.4, leading=9.4,
+                      textColor="#444444", spaceAfter=1)
+BULLET = ParagraphStyle("BULLET", parent=BODY, spaceAfter=1.5)
 
 
 def bullets(items):
@@ -114,8 +114,8 @@ story = [
 ]
 
 SimpleDocTemplate(OUT, pagesize=A4,
-                  leftMargin=20 * mm, rightMargin=20 * mm,
-                  topMargin=18 * mm, bottomMargin=18 * mm,
+                  leftMargin=15 * mm, rightMargin=15 * mm,
+                  topMargin=13 * mm, bottomMargin=13 * mm,
                   title="TikTok - Machine Learning Engineer Graduate "
                         "(Trust and Safety Engineering) - 2027 Start",
                   ).build(story)

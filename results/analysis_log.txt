@@ -1,0 +1,87 @@
+﻿Davidson : 24,783 tweets,   5.77% hate speech
+Wikipedia: 159,686 comments, 9.62% toxic
+
+========================================================================
+CORPUS: davidson   n=24,783  positives=1,430 (5.77%)
+========================================================================
+  fold 1 Linear SVM             P=0.374 R=0.395 F1=0.384 PR-AUC=0.320 ROC-AUC=0.852  [1.1s]
+  fold 1 Neural network (MLP)   P=0.625 R=0.035 F1=0.066 PR-AUC=0.279 ROC-AUC=0.802  [25.7s]
+  fold 2 Linear SVM             P=0.342 R=0.441 F1=0.385 PR-AUC=0.347 ROC-AUC=0.830  [1.0s]
+  fold 2 Neural network (MLP)   P=0.628 R=0.171 F1=0.269 PR-AUC=0.357 ROC-AUC=0.812  [25.2s]
+  fold 3 Linear SVM             P=0.386 R=0.420 F1=0.402 PR-AUC=0.351 ROC-AUC=0.825  [1.2s]
+  fold 3 Neural network (MLP)   P=0.588 R=0.175 F1=0.270 PR-AUC=0.345 ROC-AUC=0.802  [27.5s]
+  fold 4 Linear SVM             P=0.300 R=0.346 F1=0.321 PR-AUC=0.282 ROC-AUC=0.805  [1.1s]
+  fold 4 Neural network (MLP)   P=0.571 R=0.112 F1=0.187 PR-AUC=0.283 ROC-AUC=0.769  [22.3s]
+  fold 5 Linear SVM             P=0.361 R=0.455 F1=0.402 PR-AUC=0.384 ROC-AUC=0.834  [1.1s]
+  fold 5 Neural network (MLP)   P=0.684 R=0.182 F1=0.287 PR-AUC=0.370 ROC-AUC=0.818  [24.9s]
+
+  summary (davidson):
+model              Linear SVM  Neural network (MLP)
+metric                                             
+accuracy               0.9223                0.9453
+f1                     0.3791                0.2159
+pr_auc                 0.3369                0.3267
+precision              0.3527                0.6194
+precision_at_1pct      0.6320                0.6400
+recall                 0.4112                0.1350
+roc_auc                0.8291                0.8007
+
+  paired t-tests (davidson):
+            f1: diff=+0.1632 t=+4.193 p=0.0138  (SIGNIFICANT)
+        pr_auc: diff=+0.0102 t=+1.193 p=0.2989  (not significant)
+       roc_auc: diff=+0.0284 t=+4.404 p=0.0117  (SIGNIFICANT)
+        recall: diff=+0.2762 t=+12.444 p=0.0002  (SIGNIFICANT)
+     precision: diff=-0.2667 t=-13.371 p=0.0002  (SIGNIFICANT)
+
+========================================================================
+CORPUS: wikipedia   n=159,686  positives=15,362 (9.62%)
+========================================================================
+  fold 1 Linear SVM             P=0.649 R=0.834 F1=0.730 PR-AUC=0.848 ROC-AUC=0.962  [27.5s]
+  fold 1 Neural network (MLP)   P=0.840 R=0.698 F1=0.762 PR-AUC=0.845 ROC-AUC=0.962  [137.7s]
+  fold 2 Linear SVM             P=0.630 R=0.814 F1=0.710 PR-AUC=0.839 ROC-AUC=0.960  [27.0s]
+  fold 2 Neural network (MLP)   P=0.836 R=0.675 F1=0.747 PR-AUC=0.836 ROC-AUC=0.959  [138.8s]
+  fold 3 Linear SVM             P=0.643 R=0.828 F1=0.724 PR-AUC=0.845 ROC-AUC=0.961  [26.7s]
+  fold 3 Neural network (MLP)   P=0.851 R=0.681 F1=0.757 PR-AUC=0.843 ROC-AUC=0.960  [137.1s]
+  fold 4 Linear SVM             P=0.625 R=0.803 F1=0.703 PR-AUC=0.826 ROC-AUC=0.955  [27.1s]
+  fold 4 Neural network (MLP)   P=0.865 R=0.638 F1=0.734 PR-AUC=0.830 ROC-AUC=0.956  [122.4s]
+  fold 5 Linear SVM             P=0.655 R=0.821 F1=0.728 PR-AUC=0.839 ROC-AUC=0.959  [27.0s]
+  fold 5 Neural network (MLP)   P=0.862 R=0.676 F1=0.758 PR-AUC=0.845 ROC-AUC=0.961  [119.9s]
+
+  summary (wikipedia):
+model              Linear SVM  Neural network (MLP)
+metric                                             
+accuracy               0.9384                0.9572
+f1                     0.7191                0.7516
+pr_auc                 0.8393                0.8399
+precision              0.6403                0.8505
+precision_at_1pct      1.0000                0.9994
+recall                 0.8201                0.6737
+roc_auc                0.9593                0.9596
+
+  paired t-tests (wikipedia):
+            f1: diff=-0.0324 t=-28.404 p=0.0000  (SIGNIFICANT)
+        pr_auc: diff=-0.0006 t=-0.302 p=0.7780  (not significant)
+       roc_auc: diff=-0.0003 t=-0.488 p=0.6510  (not significant)
+        recall: diff=+0.1465 t=+29.414 p=0.0000  (SIGNIFICANT)
+     precision: diff=-0.2103 t=-26.082 p=0.0000  (SIGNIFICANT)
+
+========================================================================
+CROSS-CORPUS TRANSFER
+========================================================================
+  Linear SVM             wikipedia -> davidson: P=0.065 R=0.827 F1=0.121 PR-AUC=0.080 flagged=73.3% of stream (true base rate 5.8%)
+  Neural network (MLP)   wikipedia -> davidson: P=0.066 R=0.684 F1=0.120 PR-AUC=0.083 flagged=60.2% of stream (true base rate 5.8%)
+  Linear SVM             davidson -> wikipedia: P=0.310 R=0.183 F1=0.230 PR-AUC=0.234 flagged=5.7% of stream (true base rate 9.6%)
+  Neural network (MLP)   davidson -> wikipedia: P=0.682 R=0.054 F1=0.101 PR-AUC=0.240 flagged=0.8% of stream (true base rate 9.6%)
+
+========================================================================
+WHERE THE SOURCES DISAGREE
+========================================================================
+  Linear SVM             flags  82.7% of Davidson 'hate speech' (n=1,430)
+  Linear SVM             flags  82.7% of Davidson 'offensive not hate' (n=19,190)
+  Linear SVM             flags  26.7% of Davidson 'neither' (n=4,163)
+  Neural network (MLP)   flags  68.4% of Davidson 'hate speech' (n=1,430)
+  Neural network (MLP)   flags  70.8% of Davidson 'offensive not hate' (n=19,190)
+  Neural network (MLP)   flags   8.6% of Davidson 'neither' (n=4,163)
+
+Wrote C:\Users\HEET CHANCHAD\Desktop\RMIT\Sem 2\Case Studies\assignment\results\results.json
+Total runtime: 22.5 min

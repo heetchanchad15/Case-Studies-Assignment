@@ -1,4 +1,4 @@
-%----------------------------------
+﻿%----------------------------------
 \section{Job Listing}
 \label{sec:Job Listing}
 %----------------------------------
@@ -65,7 +65,7 @@ Listing~\ref{lst:models} shows the two estimators and the feature pipeline. The
 vectoriser sits \emph{inside} the pipeline so that
 \texttt{StratifiedKFold} refits it on each training fold; fitting it once over the whole
 corpus would leak test-fold vocabulary and inflate every metric, the pitfall
-\citet{page2024evaluating} raises on slide~35.
+\citet{pageEvaluating} raises on slide~35.
 
 \begin{lstlisting}[caption={Feature pipeline and the two estimators
 (\texttt{code/03\_analysis.py}).}, label={lst:models}]
@@ -158,7 +158,7 @@ page~\pageref{sec:Data Analysis}. Representative prompts:
 
 The model's first draft of the evaluation harness fitted the TF-IDF vectoriser once
 outside the cross-validation loop. This was identified against
-\citet{page2024evaluating} and corrected before any reported result was generated; the
+\citet{pageEvaluating} and corrected before any reported result was generated; the
 corrected form is the one shown in Listing~\ref{lst:models}.
 
 %----------------------------------
@@ -168,9 +168,7 @@ corrected form is the one shown in Listing~\ref{lst:models}.
 
 All code, the downloaded-data manifest and the generated results are available at:
 
-\update{create the public repository, push the \texttt{assignment/} folder, and paste the
-URL here}
-\url{https://github.com/YOUR-USERNAME/cosc2669-individual-task-1}
+\url{https://github.com/heetchanchad15/Case-Studies-Assignment}
 
 \clearpage
 
@@ -179,20 +177,26 @@ URL here}
 \label{sec:Cover Letter}
 %----------------------------------
 
+The letter below is written to stand alone: it carries its own sender and recipient
+blocks and no report formatting, so it could be sent unaltered with an application.
+\wordcount{337}
+
 \newpage
 
 \thispagestyle{empty}
+\begingroup
+\singlespacing % a business letter is single-spaced, unlike the ACM manuscript body
 
 \noindent
 {\large\textbf{Heet Chanchad}}\\[2pt]
 Melbourne VIC, Australia\\
 s4218211@student.rmit.edu.au
 
-\vspace{18pt}
+\vspace{14pt}
 
 \noindent 14 August 2026
 
-\vspace{14pt}
+\vspace{12pt}
 
 \noindent
 Early Careers Team\\
@@ -200,7 +204,7 @@ Trust \& Safety Engineering\\
 TikTok Australia\\
 Sydney NSW
 
-\vspace{14pt}
+\vspace{12pt}
 
 \noindent\textbf{Re: Machine Learning Engineer Graduate (Trust and Safety Engineering) ---
 2027 Start}
@@ -235,10 +239,11 @@ evaluated the models the way a moderation queue actually runs. Because only 5.8\
 reported precision, recall and area under the precision-recall curve, and measured
 precision across the top 1\% of the ranked stream --- the slice a fixed review team could
 genuinely process in a day. Second, I tested whether a model survives a change of source.
-A classifier trained on one corpus and applied to the other collapsed, because the two
-label schemes disagree about whether offensive language is the same thing as hate speech.
-That failure is invisible in single-dataset metrics and would surface in production as
-mass wrongful removals of ordinary speech.
+A classifier scoring 0.96 ROC-AUC on its own corpus flagged 73\% of the other platform's
+traffic against a true base rate of 5.8\%, because the two label schemes disagree about
+whether offensive language is the same thing as hate speech. That failure is invisible in
+single-dataset metrics and would surface in production as mass wrongful removals of
+ordinary speech.
 
 \vspace{8pt}
 
@@ -253,14 +258,12 @@ want its error rates broken down by dialect and community, not just its headline
 \noindent I would welcome the opportunity to discuss how I could contribute to the team.
 Thank you for your consideration.
 
-\vspace{16pt}
+\vspace{12pt}
 
 \noindent Yours sincerely,
 
-\vspace{20pt}
+\vspace{16pt}
 
 \noindent Heet Chanchad
 
-\vspace{10pt}
-
-\noindent\wordcount{398}
+\endgroup
