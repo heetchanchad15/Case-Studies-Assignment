@@ -156,10 +156,15 @@ page~\pageref{sec:Data Analysis}. Representative prompts:
     \item ``Condense this paragraph to at most 50 words without losing the citation.''
 \end{itemize}
 
-The model's first draft of the evaluation harness fitted the TF-IDF vectoriser once
-outside the cross-validation loop. This was identified against
-\citet{pageEvaluating} and corrected before any reported result was generated; the
-corrected form is the one shown in Listing~\ref{lst:models}.
+Two defects survived into a compiled draft and were caught only by rendering the PDF and
+inspecting every page rather than trusting the source. The typeset job advertisement
+originally ran to two pages, of which Figure~\ref{fig:job advertisement} included only the
+first --- the preferred qualifications were silently missing. Separately, the cover letter
+inherited the ACM template's one-and-a-half line spacing and broke across two pages,
+defeating the purpose of a stand-alone letter. Both are corrected in this version. The
+lesson generalises to the analysis itself: generated output looks finished long before it
+is correct, and the only reliable check is to inspect the artefact rather than the code
+that produced it.
 
 %----------------------------------
 \section{Link to GitHub Repository}
@@ -179,7 +184,7 @@ All code, the downloaded-data manifest and the generated results are available a
 
 The letter below is written to stand alone: it carries its own sender and recipient
 blocks and no report formatting, so it could be sent unaltered with an application.
-\wordcount{337}
+\wordcount{348}
 
 \newpage
 
@@ -216,11 +221,11 @@ Sydney NSW
 \vspace{8pt}
 
 \noindent I am writing to apply for the Machine Learning Engineer Graduate role in Trust
-and Safety Engineering. I am completing a \todo{insert your degree, e.g.\ Master of Data
-Science} at RMIT University and expect to graduate in \todo{insert month and year}, which
-meets the onboarding window described in the advertisement. I want to spend my career
-building systems that reduce harm at scale, not systems that maximise attention, and your
-team is one of the few places where that is the explicit brief.
+and Safety Engineering. I am completing a Master of Data Science at RMIT University's City
+campus, which I began in March 2026 and will finish in March 2028, and I am available to
+begin from that date. I want to spend my career building systems that reduce harm at
+scale, not systems that maximise attention, and your team is one of the few places where
+that is the explicit brief.
 
 \vspace{8pt}
 
